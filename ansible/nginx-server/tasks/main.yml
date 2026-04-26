@@ -1,0 +1,9 @@
+---
+# tasks file for nginx_custom
+
+- name: Подмена веб-страницы
+  ansible.builtin.template:
+    src: index.j2
+    dest: /var/www/html/index.nginx-debian.html
+  when:  inventory_hostname in ['vm-1','vm-2'] # Выполнится только тогда, когда в имени есть vm_1
+  notify: "Nginx Reloader"

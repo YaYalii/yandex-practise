@@ -1,0 +1,17 @@
+---
+# tasks file for nginx-proxy
+    - name: change proxy conf
+      template:
+        src: proxy_nginx.conf
+        dest: /etc/nginx/sites-available/default
+        mode: '0644'
+      notify: Reload nginx
+      when: inventory_hostname == 'vm-3'
+
+
+    - name: Убедиться что Nginx запущен
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
